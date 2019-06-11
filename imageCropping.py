@@ -19,7 +19,7 @@ def makeDirs():
         os.mkdir(rawDir)
 
     if not os.path.exists(croppedDir):
-        os.mkeir(croppedDir)
+        os.mkdir(croppedDir)
 
 
 def getImageCounter():
