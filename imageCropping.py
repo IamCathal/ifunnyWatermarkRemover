@@ -44,17 +44,21 @@ def moveFiles():
     source = 'rawFiles/'
     dest = 'croppedFiles/'
     memes = os.listdir(source)
+    fileMoved = 0
 
     for meme in memes:
         shutil.move(source+meme, dest)
+        fileMoved += 1
 
-    print("Files moved!")
+    if fileMoved:
+        print("{} files moved!".format(fileMoved))
 
 
 def cleanNames():
     lastFile = ""
     memeRegEx = '^(meme)+'
     memeCount = getImageCounter() + 1
+    memeCropped = 0
 
     for fileName in os.listdir("rawFiles"):
         if not re.match(memeRegEx, fileName):
@@ -65,9 +69,11 @@ def cleanNames():
             
             os.rename(src, newString)
             cropImage(newString)
+            memeCropped += 1
             memeCount += 1
 
-    print("Files cropped!")
+    if memeCropped:
+        print("{} files cropped!".format(memeCropped))
 
 
 if __name__ == '__main__':
