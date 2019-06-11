@@ -5,7 +5,7 @@ import os
 
 
 def main():
-    makeDirs():
+    makeDirs()
     getImageCounter()
     cleanNames()
     moveFiles()
@@ -16,10 +16,11 @@ def makeDirs():
     croppedDir = 'croppedFiles'
     
     if not os.path.exists(rawDir):
-        os.makedir(rawDir)
+        os.mkdir(rawDir)
 
     if not os.path.exists(croppedDir):
-        os.makedir(croppedDir)
+        os.mkeir(croppedDir)
+
 
 def getImageCounter():
     i = 0
