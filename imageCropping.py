@@ -6,11 +6,10 @@ import os
 
 def main():
     makeDirs()
-    getImageCounter()
     cleanNames()
     moveFiles()
 
-
+    # If folders for raw and cropped don't exist, make them
 def makeDirs():
     rawDir = 'rawFiles'
     croppedDir = 'croppedFiles'
@@ -21,7 +20,7 @@ def makeDirs():
     if not os.path.exists(croppedDir):
         os.mkdir(croppedDir)
 
-
+    # Gets the right image count for naming new files
 def getImageCounter():
     i = 0
 
@@ -30,7 +29,7 @@ def getImageCounter():
 
     return i
 
-
+    # Crops out the watermark from the bottom 
 def cropImage(imageName):
     imObj = Image.open(imageName)
     croppedHeight = imObj.size[1] - 21
@@ -39,7 +38,7 @@ def cropImage(imageName):
     croppedRegion = imObj.crop(croppedSize)
     croppedRegion.save('{}'.format(imageName), "JPEG")
 
-
+    # Moves files from raw folder to cropped folder 
 def moveFiles():
     source = 'rawFiles/'
     dest = 'croppedFiles/'
@@ -53,13 +52,13 @@ def moveFiles():
     if fileMoved:
         print("{} files moved!".format(fileMoved))
 
-
+    # Names the raw files respectively meme5.jpg ,meme6.jpg etc
 def cleanNames():
     lastFile = ""
     memeRegEx = '^(meme)+'
     memeCount = getImageCounter() + 1
     memeCropped = 0
-
+    # Checks if name is already memex.jpg (should never occur)
     for fileName in os.listdir("rawFiles"):
         if not re.match(memeRegEx, fileName):
             newString = 'meme'+str(memeCount)+'.jpg'
